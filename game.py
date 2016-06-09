@@ -6,7 +6,7 @@ import random
 import sys
 import os
 
-FRAME_TIME = 0.015
+FRAME_TIME = 0.025
 
 current_x = 200
 score = -1
@@ -67,6 +67,8 @@ def down():
 	global IS_PAUSE
 
 	while True:
+		#print("dude" + str(random.randint(75, 999)))
+		if state == "close": break
 		if IS_PAUSE != True:
 			if (truba_x < 150 and truba_x + 100 >= 55) and (current_x < diraP + 45 or current_x > diraP + 175):
 				'''messagebox.showerror("You loose(", "You loose( Your score " + str(score))
@@ -103,6 +105,7 @@ def up():
 
 	state = "up"
 	for i in range(5):
+		
 		if current_x < 0: break
 		current_x = int(current_x - 17)
 		w.coords(bird, 100, current_x)
@@ -118,12 +121,10 @@ def upKey(event = None):
 	global truba_x
 	global current_x
 	global IS_PAUSE
-	global FRAME_TIME
 
 	if IS_PAUSE == True:
 		score = -1
 		truba_x = 300
-		FRAME_TIME = 0.022
 		current_x = 200
 		updateDira()
 		w.delete(finT1)
@@ -137,10 +138,12 @@ def upKey(event = None):
 
 def close(event = None):
 	global main
-	raise SystemExit
+	global state
+	state = "close"
+	
 	main.destroy()
 	main.quit()
-	raise SystemExit
+	
 	
 
 t = Thread(target = down)
@@ -149,5 +152,5 @@ t.start()
 main.bind("<space>", upKey)
 main.bind("<Escape>", close)
 
-
+main.protocol("WM_DELETE_WINDOW", close)
 mainloop()
