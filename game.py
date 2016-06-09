@@ -6,7 +6,7 @@ import random
 import sys
 import os
 
-FRAME_TIME = 0.022
+FRAME_TIME = 0.015
 
 current_x = 200
 score = -1
@@ -118,10 +118,12 @@ def upKey(event = None):
 	global truba_x
 	global current_x
 	global IS_PAUSE
+	global FRAME_TIME
 
 	if IS_PAUSE == True:
 		score = -1
 		truba_x = 300
+		FRAME_TIME = 0.022
 		current_x = 200
 		updateDira()
 		w.delete(finT1)
