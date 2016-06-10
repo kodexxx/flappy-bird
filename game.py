@@ -6,7 +6,7 @@ import random
 import sys
 import os
 
-FRAME_TIME = 0.025
+FRAME_TIME = 0.022
 
 current_x = 200
 score = -1
@@ -26,11 +26,22 @@ else:
 	scoreFile = open('data.dat', 'w')
 	scoreFile.write(str(BEST_SCORE))
 	scoreFile.close()
-
+	
+def center(toplevel):
+    toplevel.update_idletasks()
+    w = toplevel.winfo_screenwidth()
+    h = toplevel.winfo_screenheight()
+    size = tuple(int(_) for _ in toplevel.geometry().split('+')[0].split('x'))
+    x = w/2 - size[0]/2
+    y = h/2 - size[1]/2 - 35
+    toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
+	
 main = Tk()
 main.resizable(width = False, height = False)
 main.title("Flappy Bird")
+main.geometry('550x700')
 
+center(main)
 
 w = Canvas(main, width = 550, height = 700, background = "#4EC0CA", bd=0, highlightthickness=0)
 w.pack()
@@ -121,11 +132,13 @@ def upKey(event = None):
 	global truba_x
 	global current_x
 	global IS_PAUSE
+	global FRAME_TIME
 
 	if IS_PAUSE == True:
 		score = -1
 		truba_x = 300
 		current_x = 200
+		FRAME_TIME = 0.022
 		updateDira()
 		w.delete(finT1)
 		w.delete(finT2)
@@ -153,4 +166,4 @@ main.bind("<space>", upKey)
 main.bind("<Escape>", close)
 
 main.protocol("WM_DELETE_WINDOW", close)
-mainloop()
+main.mainloop()
