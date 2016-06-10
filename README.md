@@ -6,7 +6,7 @@ Flappy Bird was a side-scrolling mobile game featuring 2D retro style graphics. 
 * Python 3 *(Python 2 had some problems)*
 
 ### Start
-To start you can simply run `python3 game.py` or `py game.py`
+To start you can simply run `python3 game.py` || `py game.py` or double click on Windows
 
 ### Used modules
 * tkinter
