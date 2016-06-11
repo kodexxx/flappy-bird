@@ -10,7 +10,6 @@ To start you can simply run `python3 game.py` || `py game.py` or double click on
 
 ### Used modules
 * tkinter
-* threading
 * random
 * time && os && sys
 
